@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.teleinfo</groupId>
+    <artifactId>id-sdk</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>id-sdk-api</module>
+        <module>id-sdk-impl</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <idhub-sdk-api.version>1.0.0-SNAPSHOT</idhub-sdk-api.version>
+        <idhub-sdk-impl.version>1.0.0-SNAPSHOT</idhub-sdk-impl.version>
+        <spring-boot.version>2.7.10</spring-boot.version>
+        <spring-cloud.version>2021.0.5</spring-cloud.version>
+        <hutool.version>5.8.20</hutool.version>
+        <lombok.version>1.18.28</lombok.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--spring boot 公共版本定义-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--spring cloud 公共版本定义-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>cn.teleinfo</groupId>
+                <artifactId>id-sdk-api</artifactId>
+                <version>${idhub-sdk-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.teleinfo</groupId>
+                <artifactId>id-sdk-impl</artifactId>
+                <version>${idhub-sdk-impl.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-json</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <!--Lombok-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <name>maven-releases</name>
+            <url>https://nexus.idx.space/repository/maven-releases</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>snapshots</id>
+            <name>maven-snapshots</name>
+            <url>https://nexus.idx.space/repository/maven-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+</project>
