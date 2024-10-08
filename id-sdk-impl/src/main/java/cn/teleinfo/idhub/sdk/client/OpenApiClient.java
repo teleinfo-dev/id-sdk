@@ -3,9 +3,7 @@ package cn.teleinfo.idhub.sdk.client;
 import cn.teleinfo.idhub.manage.doip.server.api.auth.ChallengeResponseApi;
 import cn.teleinfo.idhub.manage.doip.server.api.dataauth.DataAuthorizationApi;
 import cn.teleinfo.idhub.manage.doip.server.api.dataauth.HandleUserApi;
-import cn.teleinfo.idhub.manage.doip.server.api.file.FileApi;
 import cn.teleinfo.idhub.manage.doip.server.api.instance.InstanceApi;
-import cn.teleinfo.idhub.manage.doip.server.api.message.MessageCenterApi;
 import cn.teleinfo.idhub.manage.doip.server.api.meta.MetaApi;
 import cn.teleinfo.idhub.manage.doip.server.domain.DoipReturn;
 import cn.teleinfo.idhub.manage.doip.server.dto.auth.VerifyResponseDTO;
@@ -43,17 +41,12 @@ public class OpenApiClient {
     
     private InstanceApi instanceApi;
     
-    private FileApi fileApi;
-    
     private MetaApi metaApi;
     
     private DataAuthorizationApi dataAuthorizationApi;
     
     private HandleUserApi handleUserApi;
 
-    private MessageCenterApi messageApi;
-    
-    
     public OpenApiClient() {
         this.decoder = new JacksonDecoder();
         this.responseEntityDecoder = new ResponseEntityDecoder(decoder);
@@ -98,15 +91,6 @@ public class OpenApiClient {
                 .requestInterceptor(new AuthInterceptor(token))
                 .target(InstanceApi.class, url);
         
-        // 构建操作文件的API
-        this.fileApi = Feign.builder()
-                .encoder(encoder)
-                .decoder(responseEntityDecoder)
-                .contract(contract)
-                .retryer(Retryer.NEVER_RETRY)
-                .requestInterceptor(new AuthInterceptor(token))
-                .target(FileApi.class, url);
-        
         // 元数据操作API
         this.metaApi = Feign.builder()
                 .encoder(encoder)
@@ -133,15 +117,6 @@ public class OpenApiClient {
                 .retryer(Retryer.NEVER_RETRY)
                 .requestInterceptor(new AuthInterceptor(token))
                 .target(HandleUserApi.class, url);
-
-        // 应用身份消息API
-        this.messageApi = Feign.builder()
-                .encoder(encoder)
-                .decoder(responseEntityDecoder)
-                .contract(contract)
-                .retryer(Retryer.NEVER_RETRY)
-                .requestInterceptor(new AuthInterceptor(token))
-                .target(MessageCenterApi.class, url);
         
     }
 
@@ -194,10 +169,6 @@ public class OpenApiClient {
         return instanceApi;
     }
     
-    public FileApi getFileApi() {
-        return fileApi;
-    }
-    
     
     public MetaApi getMetaApi() {
         return metaApi;
@@ -210,10 +181,5 @@ public class OpenApiClient {
     public HandleUserApi getHandleUserApi() {
         return handleUserApi;
     }
-
-    public MessageCenterApi getMessageApi() {
-        return messageApi;
-    }
-
 
 }

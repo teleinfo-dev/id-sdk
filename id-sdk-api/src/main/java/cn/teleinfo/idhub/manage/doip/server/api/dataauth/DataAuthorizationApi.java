@@ -14,22 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @description
  */
 public interface DataAuthorizationApi {
-
-    /**
-     * 数据授权-公开或撤销公开
-     * 
-     * @return
-     */
-    @PostMapping("/api/v1/open/classes-grant/item/batch-public")
-    DoipReturn batchPublic(@RequestBody ClassGrantPublicDTO classGrantDTO);
-    
-    /**
-     * 同类数据授权
-     * 
-     * @return
-     */
-    @PostMapping("/api/v1/open/classes-grant/authorization")
-    DoipReturn metaItemAuthorization(@RequestBody ClassGrantDTO classGrantDTO);
     
     /**
      * 单一标识授权
